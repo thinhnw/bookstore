@@ -2,7 +2,6 @@ package com.bookstore.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -20,7 +19,7 @@ public class BookEntity {
     private byte[] image;
     private Double price;
     private Date publishDate;
-    private Timestamp lastUpdateTime;
+    private Date lastUpdateTime;
     private Collection<OrderDetailEntity> orderDetailsByBookId;
     private Collection<ReviewEntity> reviewsByBookId;
 
@@ -31,7 +30,7 @@ public class BookEntity {
         this.bookId = bookId;
     }
 
-    public BookEntity(String title, String author, String description, String isbn, byte[] image, Double price, Date publishDate, Timestamp lastUpdateTime, CategoryEntity categoryByCategoryId) {
+    public BookEntity(String title, String author, String description, String isbn, byte[] image, Double price, Date publishDate, Date lastUpdateTime, CategoryEntity categoryByCategoryId) {
         this.title = title;
         this.author = author;
         this.description = description;
@@ -43,7 +42,7 @@ public class BookEntity {
         this.categoryByCategoryId = categoryByCategoryId;
     }
 
-    public BookEntity(String title, String author, String description, String isbn, byte[] image, Double price, Date publishDate, Timestamp lastUpdateTime, CategoryEntity categoryByCategoryId, Collection<OrderDetailEntity> orderDetailsByBookId, Collection<ReviewEntity> reviewsByBookId) {
+    public BookEntity(String title, String author, String description, String isbn, byte[] image, Double price, Date publishDate, Date lastUpdateTime, CategoryEntity categoryByCategoryId, Collection<OrderDetailEntity> orderDetailsByBookId, Collection<ReviewEntity> reviewsByBookId) {
         this.title = title;
         this.author = author;
         this.description = description;
@@ -140,11 +139,11 @@ public class BookEntity {
 
     @Basic
     @Column(name = "last_update_time", nullable = false, length = 19)
-    public Timestamp getLastUpdateTime() {
+    public Date getLastUpdateTime() {
         return lastUpdateTime;
     }
 
-    public void setLastUpdateTime(Timestamp lastUpdateTime) {
+    public void setLastUpdateTime(Date  lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
     }
 

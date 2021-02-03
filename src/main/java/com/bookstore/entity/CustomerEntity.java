@@ -1,28 +1,58 @@
 package com.bookstore.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name = "customer", schema = "bookstoredb")
 public class CustomerEntity {
     private Integer customerId;
+
     private String email;
-    private String fullName;
+    private String fullname;
     private String address;
     private String city;
     private String country;
     private String phone;
     private String zipcode;
     private String password;
-    private Timestamp registerDate;
+    private Date registerDate;
     private Collection<BookOrderEntity> bookOrdersByCustomerId;
     private Collection<ReviewEntity> reviewsByCustomerId;
 
+    public CustomerEntity() {
+    }
+
+    public CustomerEntity(String email, String fullname, String address, String city, String country, String phone, String zipcode, String password, Date registerDate) {
+        this.email = email;
+        this.fullname = fullname;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.phone = phone;
+        this.zipcode = zipcode;
+        this.password = password;
+        this.registerDate = registerDate;
+    }
+
+    public CustomerEntity(String email, String fullname, String address, String city, String country, String phone, String zipcode, String password, Date registerDate, Collection<BookOrderEntity> bookOrdersByCustomerId, Collection<ReviewEntity> reviewsByCustomerId) {
+        this.email = email;
+        this.fullname = fullname;
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.phone = phone;
+        this.zipcode = zipcode;
+        this.password = password;
+        this.registerDate = registerDate;
+        this.bookOrdersByCustomerId = bookOrdersByCustomerId;
+        this.reviewsByCustomerId = reviewsByCustomerId;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", unique = true, nullable = false)
     public Integer getCustomerId() {
         return customerId;
     }
@@ -32,7 +62,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "email")
+    @Column(name = "email", unique = true, nullable = false, length = 64)
     public String getEmail() {
         return email;
     }
@@ -42,17 +72,17 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "fullname")
+    @Column(name = "fullname", nullable = false, length = 30)
     public String getFullName() {
-        return fullName;
+        return fullname;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFullName(String fullname) {
+        this.fullname = fullname;
     }
 
     @Basic
-    @Column(name = "address")
+    @Column(name = "address", nullable = false, length = 120)
     public String getAddress() {
         return address;
     }
@@ -62,7 +92,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "city")
+    @Column(name = "city", nullable = false, length = 32)
     public String getCity() {
         return city;
     }
@@ -72,7 +102,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "country")
+    @Column(name = "country", nullable = false, length = 64)
     public String getCountry() {
         return country;
     }
@@ -82,7 +112,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "phone")
+    @Column(name = "phone", nullable = false, length = 15)
     public String getPhone() {
         return phone;
     }
@@ -92,7 +122,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "zipcode")
+    @Column(name = "zipcode", nullable = false, length = 24)
     public String getZipcode() {
         return zipcode;
     }
@@ -102,7 +132,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 16)
     public String getPassword() {
         return password;
     }
@@ -112,12 +142,12 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "register_date")
-    public Timestamp getRegisterDate() {
+    @Column(name = "register_date", nullable = false, length = 19)
+    public Date getRegisterDate() {
         return registerDate;
     }
 
-    public void setRegisterDate(Timestamp registerDate) {
+    public void setRegisterDate(Date registerDate) {
         this.registerDate = registerDate;
     }
 

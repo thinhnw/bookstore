@@ -1,23 +1,36 @@
 package com.bookstore.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "review", schema = "bookstoredb")
 public class ReviewEntity {
+
     private Integer reviewId;
     private BookEntity bookByBookId;
     private CustomerEntity customerByCustomerId;
     private Integer rating;
     private String headline;
     private String comment;
-    private Timestamp reviewTime;
+    private Date reviewTime;
 
+    public ReviewEntity() {
+    }
+
+    public ReviewEntity(Integer reviewId, BookEntity bookByBookId, CustomerEntity customerByCustomerId, Integer rating, String headline, String comment, Date reviewTime) {
+        this.reviewId = reviewId;
+        this.bookByBookId = bookByBookId;
+        this.customerByCustomerId = customerByCustomerId;
+        this.rating = rating;
+        this.headline = headline;
+        this.comment = comment;
+        this.reviewTime = reviewTime;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "review_id")
+    @Column(name = "review_id", unique = true, nullable = false)
     public Integer getReviewId() {
         return reviewId;
     }
@@ -27,7 +40,7 @@ public class ReviewEntity {
     }
 
     @Basic
-    @Column(name = "rating")
+    @Column(name = "rating", nullable = false)
     public Integer getRating() {
         return rating;
     }
@@ -37,7 +50,7 @@ public class ReviewEntity {
     }
 
     @Basic
-    @Column(name = "headline")
+    @Column(name = "headline", nullable = false, length = 128)
     public String getHeadline() {
         return headline;
     }
@@ -47,7 +60,7 @@ public class ReviewEntity {
     }
 
     @Basic
-    @Column(name = "comment")
+    @Column(name = "comment", nullable = false, length = 500)
     public String getComment() {
         return comment;
     }
@@ -57,12 +70,12 @@ public class ReviewEntity {
     }
 
     @Basic
-    @Column(name = "review_time")
-    public Timestamp getReviewTime() {
+    @Column(name = "review_time", nullable = false, length = 19)
+    public Date getReviewTime() {
         return reviewTime;
     }
 
-    public void setReviewTime(Timestamp reviewTime) {
+    public void setReviewTime(Date reviewTime) {
         this.reviewTime = reviewTime;
     }
 

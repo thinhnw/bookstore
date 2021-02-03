@@ -1,8 +1,8 @@
 package com.bookstore.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Table(name = "book_order", schema = "bookstoredb")
@@ -11,7 +11,7 @@ public class BookOrderEntity {
     private Integer orderId;
 
     private CustomerEntity customerByCustomerId;
-    private Timestamp orderDate;
+    private Date orderDate;
     private String shippingAddress;
     private String recipientName;
     private String recipientPhone;
@@ -20,9 +20,35 @@ public class BookOrderEntity {
     private String status;
     private Collection<OrderDetailEntity> orderDetailsByOrderId;
 
+    public BookOrderEntity() {
+    }
+
+    public BookOrderEntity(CustomerEntity customerByCustomerId, Date orderDate, String shippingAddress, String recipientName, String recipientPhone, String paymentMethod, Double total, String status) {
+        this.customerByCustomerId = customerByCustomerId;
+        this.orderDate = orderDate;
+        this.shippingAddress = shippingAddress;
+        this.recipientName = recipientName;
+        this.recipientPhone = recipientPhone;
+        this.paymentMethod = paymentMethod;
+        this.total = total;
+        this.status = status;
+    }
+
+    public BookOrderEntity(CustomerEntity customerByCustomerId, Date orderDate, String shippingAddress, String recipientName, String recipientPhone, String paymentMethod, Double total, String status, Collection<OrderDetailEntity> orderDetailsByOrderId) {
+        this.customerByCustomerId = customerByCustomerId;
+        this.orderDate = orderDate;
+        this.shippingAddress = shippingAddress;
+        this.recipientName = recipientName;
+        this.recipientPhone = recipientPhone;
+        this.paymentMethod = paymentMethod;
+        this.total = total;
+        this.status = status;
+        this.orderDetailsByOrderId = orderDetailsByOrderId;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+    @Column(name = "order_id", unique = true, nullable = false)
     public Integer getOrderId() {
         return orderId;
     }
@@ -33,17 +59,17 @@ public class BookOrderEntity {
 
 
     @Basic
-    @Column(name = "order_date")
-    public Timestamp getOrderDate() {
+    @Column(name = "order_date", nullable = false, length = 19)
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Timestamp orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
     @Basic
-    @Column(name = "shipping_address")
+    @Column(name = "shipping_address", nullable = false, length = 256)
     public String getShippingAddress() {
         return shippingAddress;
     }
@@ -53,7 +79,7 @@ public class BookOrderEntity {
     }
 
     @Basic
-    @Column(name = "recipient_name")
+    @Column(name = "recipient_name", nullable = false, length = 30)
     public String getRecipientName() {
         return recipientName;
     }
@@ -63,7 +89,7 @@ public class BookOrderEntity {
     }
 
     @Basic
-    @Column(name = "recipient_phone")
+    @Column(name = "recipient_phone", nullable = false, length = 15)
     public String getRecipientPhone() {
         return recipientPhone;
     }
@@ -73,7 +99,7 @@ public class BookOrderEntity {
     }
 
     @Basic
-    @Column(name = "payment_method")
+    @Column(name = "payment_method", nullable = false, length = 20)
     public String getPaymentMethod() {
         return paymentMethod;
     }
@@ -83,7 +109,7 @@ public class BookOrderEntity {
     }
 
     @Basic
-    @Column(name = "total")
+    @Column(name = "total", nullable = false, precision = 12)
     public Double getTotal() {
         return total;
     }
@@ -93,7 +119,7 @@ public class BookOrderEntity {
     }
 
     @Basic
-    @Column(name = "status")
+    @Column(name = "status", nullable = false, length = 20)
     public String getStatus() {
         return status;
     }

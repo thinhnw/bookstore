@@ -5,11 +5,26 @@ import javax.persistence.*;
 @Entity
 @Table(name = "order_detail", schema = "bookstoredb")
 public class OrderDetailEntity {
+
     private Long id;
     private BookOrderEntity bookOrderByOrderId;
     private BookEntity bookByBookId;
     private Integer quantity;
     private Double subtotal;
+
+    public OrderDetailEntity() {
+    }
+
+    public OrderDetailEntity(Long id) {
+        this.id = id;
+    }
+
+    public OrderDetailEntity(BookOrderEntity bookOrderByOrderId, BookEntity bookByBookId, Integer quantity, Double subtotal) {
+        this.bookOrderByOrderId = bookOrderByOrderId;
+        this.bookByBookId = bookByBookId;
+        this.quantity = quantity;
+        this.subtotal = subtotal;
+    }
 
     @Id
     @GeneratedValue
@@ -22,7 +37,7 @@ public class OrderDetailEntity {
     }
 
     @Basic
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     public Integer getQuantity() {
         return quantity;
     }
@@ -32,7 +47,7 @@ public class OrderDetailEntity {
     }
 
     @Basic
-    @Column(name = "subtotal")
+    @Column(name = "subtotal", nullable = false, precision = 12)
     public Double getSubtotal() {
         return subtotal;
     }
@@ -42,7 +57,7 @@ public class OrderDetailEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_id", insertable = false, updatable = false, nullable = false)
     public BookOrderEntity getBookOrderByOrderId() {
         return bookOrderByOrderId;
     }
@@ -52,7 +67,7 @@ public class OrderDetailEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "book_id", insertable = false, updatable = false, nullable = false)
     public BookEntity getBookByBookId() {
         return bookByBookId;
     }
