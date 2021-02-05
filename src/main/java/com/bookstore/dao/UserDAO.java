@@ -2,6 +2,7 @@ package com.bookstore.dao;
 import com.bookstore.entity.UsersEntity;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 public class UserDAO extends JpaDAO<UsersEntity> implements GenericDAO<UsersEntity> {
@@ -22,22 +23,22 @@ public class UserDAO extends JpaDAO<UsersEntity> implements GenericDAO<UsersEnti
 
     @Override
     public UsersEntity get(Object id) {
-        return null;
+        return super.find(UsersEntity.class, id);
     }
 
     @Override
     public void delete(Object id) {
-
+        super.delete(UsersEntity.class, id);
     }
 
     @Override
     public List<UsersEntity> listAll() {
-        return null;
+        return super.findWithNamedQuery("UsersEntity.findAll");
     }
 
     @Override
     public long count() {
-        return 0;
+        return super.countWithNamedQuery("UsersEntity.countAll");
     }
 
 }

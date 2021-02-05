@@ -4,6 +4,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users", schema = "bookstoredb")
+@NamedQueries({
+    @NamedQuery(name = "UsersEntity.findAll", query = "SELECT u FROM UsersEntity u ORDER BY u.fullName"),
+    @NamedQuery(name = "UsersEntity.countAll", query = "SELECT Count(*) FROM UsersEntity u")
+})
 public class UsersEntity {
 
     private Integer userId;
