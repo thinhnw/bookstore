@@ -12,9 +12,18 @@ public class UsersEntity {
 
     private Integer userId;
     private String email;
-    private String password;
     private String fullName;
+    private String password;
 
+    public UsersEntity() {
+
+    }
+
+    public UsersEntity(String email, String fullName, String password) {
+        this.email = email;
+        this.fullName = fullName;
+        this.password = password;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
