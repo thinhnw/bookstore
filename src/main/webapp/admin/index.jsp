@@ -6,10 +6,10 @@
 <body>
     <jsp:include page="header.jsp" />
 
-    <div>
+    <div align="center">
         <h2>Administrative Dashboard</h2>
     </div>
-    <div>
+    <div align="center">
         <hr/>
         <h2>Quick Actions</h2>
         <a href="create_book">New Book</a>

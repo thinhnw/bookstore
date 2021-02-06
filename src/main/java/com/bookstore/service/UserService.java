@@ -49,13 +49,27 @@ public class UserService {
         rd.forward(request, response);
     }
 
-    public void createUser() throws IOException {
+    public void createUser() throws IOException, ServletException {
 
         String email = request.getParameter("email");
         String fullName = request.getParameter("fullname");
         String password = request.getParameter("password");
 
-        UsersEntity user = new UsersEntity(email, fullName, password);
-        userDAO.create(user);
+        UsersEntity existUser = userDAO.findByEmail(email);
+
+        if (existUser != null) {
+            String message = "Could not create user. An user with email " + email + " already exists.";
+            request.setAttribute("message", message);
+            RequestDispatcher rd = request.getRequestDispatcher("message.jsp");
+            rd.forward(request, response);
+        } else {
+            UsersEntity user = new UsersEntity(email, fullName, password);
+            userDAO.create(user);
+            listUser("New user created successfully!");
+        }
+    }
+
+    public void editUser() {
+
     }
 }
