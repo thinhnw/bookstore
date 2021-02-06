@@ -7,11 +7,9 @@
 <body>
 <jsp:include page="header.jsp" />
 
-<div>
+<div align="center">
     <h2>Users Management</h2>
     <a href="user_form.jsp">Create New User</a>
-</div>
-<div>
     <table border="1" cellpadding="5">
         <tr>
             <th>Index</th>
