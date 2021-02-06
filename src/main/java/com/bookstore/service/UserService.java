@@ -69,7 +69,48 @@ public class UserService {
         }
     }
 
-    public void editUser() {
+    public void editUser() throws ServletException, IOException {
+
+        Integer userId = Integer.parseInt(request.getParameter("id"));
+        UsersEntity user = userDAO.get(userId);
+        if (user != null) {
+            request.setAttribute("user", user);
+            String editPage = "user_form.jsp";
+            RequestDispatcher rd = request.getRequestDispatcher(editPage);
+            rd.forward(request, response);
+        } else {
+            String message = "Could not find user with " + userId + ".";
+            request.setAttribute("message", message);
+            RequestDispatcher rd = request.getRequestDispatcher("message.jsp");
+            rd.forward(request, response);
+        }
+
+    }
+
+    public void updateUser() throws ServletException, IOException {
+
+        Integer userId = Integer.parseInt(request.getParameter("userId"));
+        String email = request.getParameter("email");
+        String fullName = request.getParameter("fullname");
+        String password = request.getParameter("password");
+
+        UsersEntity userById = userDAO.get(userId);
+        UsersEntity userByEmail = userDAO.findByEmail(email);
+
+        if (userByEmail != null && userByEmail.getUserId() != userById.getUserId()) {
+
+            String message = "Could not update the user. User with email "
+                            + email + " already exists.";
+            request.setAttribute("message", message);
+            RequestDispatcher rd = request.getRequestDispatcher("message.jsp");
+            rd.forward(request, response);
+        } else {
+            UsersEntity user = new UsersEntity(userId, email, fullName, password);
+            userDAO.update(user);
+
+            String message = "User has been updated successfully!";
+            listUser(message);
+        }
 
     }
 }

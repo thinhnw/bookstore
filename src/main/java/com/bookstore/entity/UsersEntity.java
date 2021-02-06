@@ -20,6 +20,13 @@ public class UsersEntity {
 
     }
 
+    public UsersEntity(Integer userId, String email, String fullName, String password) {
+        this.userId = userId;
+        this.email = email;
+        this.fullName = fullName;
+        this.password = password;
+    }
+
     public UsersEntity(String email, String fullName, String password) {
         this.email = email;
         this.fullName = fullName;

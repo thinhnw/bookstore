@@ -8,22 +8,60 @@
 <jsp:include page="header.jsp" />
 
 <div align="center">
-    <h2>Create New User</h2>
+    <h2>
+        <c:if test="${user != null}">
+            Edit User
+        </c:if>
+        <c:if test="${user == null}">
+            Create New User
+        </c:if>
+    </h2>
 </div>
 <div align="center">
-    <form action="create_user" method="post" onsubmit="return validateFormInput()">
+    <c:if test="${user != null}">
+        <c:set var="formAction" value="update_user"/>
+    </c:if>
+    <c:if test="${user == null}">
+        <c:set var="formAction" value="create_user"/>
+    </c:if>
+    <form action="${formAction}" method="post" onsubmit="return validateFormInput()">
+
+        <c:if test="${user != null}">
+            <input type="hidden" name="userId" value="${user.userId}">
+        </c:if>
         <table>
             <tr>
                 <td>Email:</td>
-                <td><input type="email" id="email" name="email" size="20" required /></td>
+                <td>
+                    <input type="email"
+                           id="email"
+                           name="email"
+                           size="20"
+                           value="${user.email}"
+                           required/>
+                </td>
             </tr>
             <tr>
                 <td>Full Name:</td>
-                <td><input type="text" id="fullname" name="fullname" size="20" required /></td>
+                <td>
+                    <input type="text"
+                           id="fullname"
+                           name="fullname"
+                           size="20"
+                           value="${user.fullName}"
+                           required />
+                </td>
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><input type="password" id="password" name="password" size="20" required/></td>
+                <td>
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           size="20"
+                           value="${user.password}"
+                           required/>
+                </td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr>
