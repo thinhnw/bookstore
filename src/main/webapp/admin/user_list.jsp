@@ -10,6 +10,11 @@
 <div align="center">
     <h2>Users Management</h2>
     <a href="user_form.jsp">Create New User</a>
+
+    <c:if test="${message != null}">
+        <h4><em>${message}</em></h4>
+    </c:if>
+
     <table border="1" cellpadding="5">
         <tr>
             <th>Index</th>
