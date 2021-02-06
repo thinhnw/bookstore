@@ -6,7 +6,7 @@
         Welcome, Admin | <a href="logout">Logout</a>
     </div>
     <div>
-        <a href="users">Users</a>
+        <a href="list_users">Users</a>
         <a href="categories">Categories</a>
         <a href="books">Books</a>
         <a href="customer">Customers</a>
