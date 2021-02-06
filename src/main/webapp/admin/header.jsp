@@ -1,4 +1,4 @@
-<div>
+<div align="center">
     <div>
         <img src="../images/BookstoreAdminLogo.png" alt="Bookstore Admin Logo">
     </div>
