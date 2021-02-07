@@ -12,8 +12,8 @@ public class UserDAO extends JpaDAO<UsersEntity> implements GenericDAO<UsersEnti
     }
 
     @Override
-    public UsersEntity create(UsersEntity usersEntity) {
-        return super.create(usersEntity);
+    public UsersEntity create(UsersEntity e) {
+        return super.create(e);
     }
 
     @Override
