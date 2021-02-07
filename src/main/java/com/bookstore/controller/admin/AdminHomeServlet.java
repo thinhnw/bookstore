@@ -6,7 +6,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "AdminHomeServlet", value = "/admin/")
-public class AdminHomeServlet extends HttpServlet {
+public class AdminHomeServlet extends BaseServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

@@ -12,18 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class CategoryService {
-    private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
     private CategoryDAO categoryDAO;
     private HttpServletRequest request;
     private HttpServletResponse response;
 
-    public CategoryService(HttpServletRequest request, HttpServletResponse response) {
+    public CategoryService(EntityManager entityManager,
+                           HttpServletRequest request, HttpServletResponse response) {
+        this.entityManager = entityManager;
         this.request = request;
         this.response = response;
 
-        entityManagerFactory = Persistence.createEntityManagerFactory("BookStoreWebsite");
-        entityManager = entityManagerFactory.createEntityManager();
         categoryDAO = new CategoryDAO(entityManager);
     }
 
