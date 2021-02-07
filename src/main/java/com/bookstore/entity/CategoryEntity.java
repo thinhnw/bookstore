@@ -5,6 +5,12 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "category", schema = "bookstoredb")
+@NamedQueries({
+        @NamedQuery(name = "CategoryEntity.findAll",
+                    query = "SELECT c FROM CategoryEntity c ORDER BY c.name"),
+        @NamedQuery(name = "CategoryEntity.countAll",
+                    query = "SELECT COUNT(*) FROM CategoryEntity c")
+})
 public class CategoryEntity {
 
     private Integer categoryId;

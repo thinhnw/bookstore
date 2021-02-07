@@ -13,22 +13,23 @@ public class CategoryDAO extends JpaDAO<CategoryEntity> implements GenericDAO<Ca
 
     @Override
     public CategoryEntity get(Object id) {
-        return null;
+
+        return super.find(CategoryEntity.class, id);
     }
 
     @Override
     public void delete(Object id) {
-
+        super.delete(CategoryEntity.class, id);
     }
 
     @Override
     public List<CategoryEntity> listAll() {
-        return null;
+        return super.findWithNamedQuery("CategoryEntity.findAll");
     }
 
     @Override
     public long count() {
-        return 0;
+        return super.countWithNamedQuery("CategoryEntity.countAll");
     }
 
     @Override
@@ -37,8 +38,8 @@ public class CategoryDAO extends JpaDAO<CategoryEntity> implements GenericDAO<Ca
     }
 
     @Override
-    public CategoryEntity update(CategoryEntity entity) {
-        return super.update(entity);
+    public CategoryEntity update(CategoryEntity category) {
+        return super.update(category);
     }
 
     @Override
