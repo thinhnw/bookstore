@@ -32,4 +32,9 @@ public class CategoryService {
         request.setAttribute("listCategory", listCategory);
 
     }
+
+    public void createCategory() {
+        CategoryEntity ctg = new CategoryEntity();
+        categoryDAO.create(ctg);
+    }
 }

@@ -51,4 +51,12 @@ public class CategoryDAO extends JpaDAO<CategoryEntity> implements GenericDAO<Ca
     public void delete(Class<CategoryEntity> type, Object id) {
         super.delete(type, id);
     }
+
+    public CategoryEntity findByName(String name) {
+        List<CategoryEntity> listCtg = super.findWithNamedQuery("CategoryEntity.findByName", "name", name);
+        if (listCtg != null && !listCtg.isEmpty()) {
+            return listCtg.get(0);
+        }
+        return null;
+    }
 }
