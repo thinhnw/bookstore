@@ -113,4 +113,31 @@ public class UserService {
         }
 
     }
+
+    public void deleteUser() throws ServletException, IOException {
+
+        int userId = Integer.parseInt(request.getParameter("id"));
+
+        UsersEntity user = userDAO.get(userId);
+        String message = "User has been deleted successfully";
+
+        if (userId == 1) {
+            message = "The default admin user account cannot be deleted.";
+
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("message.jsp").forward(request, response);
+            return;
+        }
+
+        if (user == null) {
+            message = "Could not find user with ID " + userId
+                    + ", or it might have been deleted by another admin";
+
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("message.jsp").forward(request, response);
+        } else {
+            userDAO.delete(userId);
+            listUser(message);
+        }
+    }
 }

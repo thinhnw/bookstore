@@ -32,12 +32,22 @@
                 <td>
                     <a href="edit_user?id=${user.userId}">Edit</a>
                     |
-                    <a href="">Delete</a>
+<%--                    <a href="delete_user?id=${user.userId}" onclick="">Delete</a>--%>
+                    <a href="javascript:confirmDelete(${user.userId})">Delete</a>
                 </td>
             </tr>
         </c:forEach>
     </table>
 </div>
 <jsp:include page="footer.jsp" />
+<script>
+    function confirmDelete(userId) {
+        if (confirm('Are you sure you want to delete the use with ID ' + userId + ' ?')) {
+            window.location = 'delete_user?id=' + userId;
+        } else {
+
+        }
+    }
+</script>
 </body>
 </html>
