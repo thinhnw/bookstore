@@ -2,7 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Create New User</title>
+    <c:if test="${user != null}">
+        <title>Edit User</title>
+    </c:if>
+    <c:if test="${user == null}">
+        <title>Create New User</title>
+    </c:if>
 </head>
 <body>
 <jsp:include page="header.jsp" />

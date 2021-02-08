@@ -2,7 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Create New Category</title>
+    <c:if test="${category != null}">
+        <title>Edit Category</title>
+    </c:if>
+    <c:if test="${category == null}">
+        <title>Create New Category</title>
+    </c:if>
 </head>
 <body>
 <jsp:include page="header.jsp" />
@@ -35,7 +40,7 @@
                 <td>
                     <input type="text"
                            id="name"
-                           name="name"
+                           name="categoryName"
                            size="20"
                            value="${category.name}"
                            required />
