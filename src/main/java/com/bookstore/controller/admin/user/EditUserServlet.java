@@ -1,6 +1,6 @@
 package com.bookstore.controller.admin.user;
 
-import com.bookstore.controller.admin.BaseServlet;
+import com.bookstore.controller.BaseServlet;
 import com.bookstore.service.UserService;
 
 import javax.servlet.*;

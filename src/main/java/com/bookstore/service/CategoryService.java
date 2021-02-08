@@ -3,6 +3,7 @@ package com.bookstore.service;
 import com.bookstore.dao.CategoryDAO;
 import com.bookstore.dao.UserDAO;
 import com.bookstore.entity.CategoryEntity;
+import com.bookstore.entity.UsersEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -85,6 +86,14 @@ public class CategoryService {
         CategoryEntity categoryById = categoryDAO.get(categoryId);
         CategoryEntity categoryByName = categoryDAO.findByName(categoryName);
 
+        if (categoryById == null) {
+
+            String message = "Could not update category. A category with ID " + categoryId + " no longer exists.";
+            request.setAttribute("message", message);
+            RequestDispatcher rd = request.getRequestDispatcher("message.jsp");
+            rd.forward(request, response);
+        }
+
         if (categoryByName != null && categoryById.getCategoryId() != categoryByName.getCategoryId()) {
 
             String message = "Could not update category. A category with name " + categoryName + " already exists.";
@@ -99,4 +108,24 @@ public class CategoryService {
         }
 
     }
+
+    public void deleteCategory() throws ServletException, IOException {
+
+        int categoryId = Integer.parseInt(request.getParameter("id"));
+
+        CategoryEntity category = categoryDAO.get(categoryId);
+        String message = "User has been deleted successfully";
+
+        if (category == null) {
+            message = "Could not find category with ID " + categoryId
+                    + ", or it might have been deleted by another admin";
+
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("message.jsp").forward(request, response);
+        } else {
+            categoryDAO.delete(categoryId);
+            listCategory(message);
+        }
+    }
+
 }
