@@ -47,14 +47,17 @@ public class CategoryService {
 
     public void createCategory() throws ServletException, IOException {
         String name = request.getParameter("name");
+        System.out.println(name);
         CategoryEntity ctg = categoryDAO.findByName(name);
+
         if (ctg != null) {
             String message = "Could not create category. This category already exists!";
             request.setAttribute("message", message);
             RequestDispatcher rd = request.getRequestDispatcher("message.jsp");
             rd.forward(request, response);
         } else {
-            categoryDAO.create(new CategoryEntity(name));
+            CategoryEntity category = new CategoryEntity(name);
+            categoryDAO.create(category);
             String message = "Category created successfully";
             listCategory(message);
         }
@@ -81,7 +84,7 @@ public class CategoryService {
     public void updateCategory() throws ServletException, IOException {
 
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-        String categoryName  = request.getParameter("categoryName");
+        String categoryName  = request.getParameter("name");
 
         CategoryEntity categoryById = categoryDAO.get(categoryId);
         CategoryEntity categoryByName = categoryDAO.findByName(categoryName);

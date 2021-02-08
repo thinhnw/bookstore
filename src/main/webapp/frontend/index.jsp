@@ -7,7 +7,7 @@
 <body>
     <jsp:include page="header.jsp" />
 
-    <div>
+    <div align="center">
         <h2>This is Newest book section</h2>
         <h2>This is Best selling book section</h2>
         <h2>This is Most favourite book section</h2>

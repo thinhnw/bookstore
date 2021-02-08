@@ -11,7 +11,7 @@ import java.util.Collection;
         @NamedQuery(name = "CategoryEntity.countAll",
                     query = "SELECT COUNT(*) FROM CategoryEntity c"),
         @NamedQuery(name = "CategoryEntity.findByName",
-                    query= "SELECT c FROM CategoryEntity c WHERE c.name = :name")
+                    query = "SELECT c FROM CategoryEntity c WHERE c.name = :name")
 })
 public class CategoryEntity {
 

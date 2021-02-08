@@ -40,7 +40,7 @@
                 <td>
                     <input type="text"
                            id="name"
-                           name="categoryName"
+                           name="name"
                            size="20"
                            value="${category.name}"
                            required />
