@@ -15,10 +15,5 @@ public class ListCategoryServlet extends BaseServlet {
 
         CategoryService categoryService = new CategoryService(entityManager, request, response);
         categoryService.listCategory();
-
-        String listPage = "category_list.jsp";
-        RequestDispatcher rd = request.getRequestDispatcher(listPage);
-
-        rd.forward(request, response);
     }
 }

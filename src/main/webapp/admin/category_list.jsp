@@ -28,7 +28,7 @@
                 <td>${ctg.categoryId}</td>
                 <td>${ctg.name}</td>
                 <td>
-                    <a href="edit_categroy?id=${ctg.categoryId}">Edit</a>
+                    <a href="edit_category?id=${ctg.categoryId}">Edit</a>
                     |
                     <a href="javascript:confirmDelete(${ctg.categoryId})">Delete</a>
                 </td>

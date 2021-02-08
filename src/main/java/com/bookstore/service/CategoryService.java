@@ -58,4 +58,10 @@ public class CategoryService {
             listCategory(message);
         }
     }
+
+    public void editCategory() {
+
+        int id = Integer.parseInt(request.getParameter("id"));
+        CategoryEntity ctg = categoryDAO.get(id);
+    }
 }
