@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+#header_menu {
+    display: table;
+}
+#header_menu {
+    font-size: 1.2rem;
+}
+#header_menu div {
+    display: table-cell;
+    padding-right: 20px;
+}
+a:link {
+    color: cornflowerblue;
+    text-decoration: none;
+}
+a:visited {
+    color: indigo;
+}
+a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+a:active {
+    color: red;
+}
+
+.error {
+    color: red;
+}

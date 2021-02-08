@@ -8,6 +8,9 @@
     <c:if test="${user == null}">
         <title>Create New User</title>
     </c:if>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script src="../js/jquery.validate.min.js"></script>
 </head>
 <body>
 <jsp:include page="header.jsp" />
@@ -29,7 +32,7 @@
     <c:if test="${user == null}">
         <c:set var="formAction" value="create_user"/>
     </c:if>
-    <form action="${formAction}" method="post" onsubmit="return validateFormInput()">
+    <form action="${formAction}" method="post" id="user_form">
 
         <c:if test="${user != null}">
             <input type="hidden" name="userId" value="${user.userId}">
@@ -43,7 +46,7 @@
                            name="email"
                            size="20"
                            value="${user.email}"
-                           required/>
+                           />
                 </td>
             </tr>
             <tr>
@@ -54,7 +57,7 @@
                            name="fullname"
                            size="20"
                            value="${user.fullName}"
-                           required />
+                            /js>
                 </td>
             </tr>
             <tr>
@@ -65,43 +68,45 @@
                            name="password"
                            size="20"
                            value="${user.password}"
-                           required/>
+                           />
                 </td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr>
                 <td colspan="2" align="center">
                     <input type="submit" value="Save">
-                    <input type="button" value="Cancel" onclick="javascript:history.go(-1);">
+                    <input type="button" value="Cancel" id="cancel">
                 </td>
             </tr>
         </table>
     </form>
+    <script src="../js/main.js"></script>
 </div>
 <jsp:include page="footer.jsp" />
 </body>
 <script type="text/javascript">
-    function validateFormInput() {
-        let fieldEmail = document.getElementById("email");
-        let fieldFullname = document.getElementById("fullname");
-        let fieldPassword = document.getElementById("password");
-
-        if (fieldEmail.value.length === 0) {
-            alert("Email is required!");
-            fieldEmail.focus();
-            return false;
-        }
-        if (fieldFullname.value.length === 0) {
-            alert("Full Name is required!");
-            fieldFullname.focus();
-            return false;
-        }
-        if (fieldPassword.value.length === 0) {
-            alert("Password is required!");
-            fieldPassword.focus();
-            return false;
-        }
-        return true;
-    }
+    $(document).ready(function(){
+       $("#user_form").validate({
+           rules: {
+               email: {
+                   required: true,
+                   email: true
+               },
+               fullname: "required",
+               password: "required"
+           },
+           messages: {
+               email: {
+                   required: "Please enter email",
+                   email: "Please enter a valid email address"
+               },
+               fullname: "Please enter full name",
+               password: "Please enter password"
+           }
+       });
+       $("#cancel").click(function() {
+           history.go(-1);
+       })
+    })
 </script>
 </html>

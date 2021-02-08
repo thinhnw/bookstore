@@ -3,6 +3,9 @@
 <html>
 <head>
     <title>Manage Users - Evergreen Bookstore Administration</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script src="../js/jquery.validate.min.js"></script>
 </head>
 <body>
 <jsp:include page="header.jsp" />
@@ -33,7 +36,7 @@
                     <a href="edit_user?id=${user.userId}">Edit</a>
                     |
 <%--                    <a href="delete_user?id=${user.userId}" onclick="">Delete</a>--%>
-                    <a href="javascript:confirmDelete(${user.userId})">Delete</a>
+                    <a href="javascript:void(0)" class="delete_link" id="${user.userId}">Delete</a>
                 </td>
             </tr>
         </c:forEach>
@@ -41,13 +44,16 @@
 </div>
 <jsp:include page="footer.jsp" />
 <script>
-    function confirmDelete(userId) {
-        if (confirm('Are you sure you want to delete the use with ID ' + userId + ' ?')) {
-            window.location = 'delete_user?id=' + userId;
-        } else {
-
-        }
-    }
+    $(document).ready(function() {
+        $(".delete_link").each(function() {
+            $(this).on("click", function() {
+                let userId = $(this).attr("id");
+                if (confirm('Are you sure you want to delete the use with ID ' + userId + ' ?')) {
+                    window.location = 'delete_user?id=' + userId;
+                }
+            });
+        })
+    })
 </script>
 </body>
 </html>

@@ -8,6 +8,9 @@
     <c:if test="${category == null}">
         <title>Create New Category</title>
     </c:if>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/jquery-3.5.1.min.js"></script>
+    <script src="../js/jquery.validate.min.js"></script>
 </head>
 <body>
 <jsp:include page="header.jsp" />
@@ -29,7 +32,7 @@
     <c:if test="${category == null}">
         <c:set var="formAction" value="create_category"/>
     </c:if>
-    <form action="${formAction}" method="post" onsubmit="return validateFormInput()">
+    <form action="${formAction}" method="post" id="category_form">
 
         <c:if test="${category != null}">
             <input type="hidden" name="categoryId" value="${category.categoryId}">
@@ -43,14 +46,14 @@
                            name="name"
                            size="20"
                            value="${category.name}"
-                           required />
+                           />
                 </td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr>
                 <td colspan="2" align="center">
                     <input type="submit" value="Save">
-                    <input type="button" value="Cancel" onclick="javascript:history.go(-1);">
+                    <input type="button" value="Cancel" id="cancel">
                 </td>
             </tr>
         </table>
@@ -59,15 +62,19 @@
 <jsp:include page="footer.jsp" />
 </body>
 <script type="text/javascript">
-    function validateFormInput() {
-        let fieldName = document.getElementById("name");
+    $(document).ready(function() {
+        $("#category_form").validate({
+            rules: {
+                name: "required"
+            },
+            messages: {
+                name: "Please enter a name"
+            }
+        });
 
-        if (fieldName.value.length === 0) {
-            alert("Name is required!");
-            fieldName.focus();
-            return false;
-        }
-        return true;
-    }
+        $("#cancel").click(function() {
+            history.go(-1);
+        })
+    })
 </script>
 </html>
