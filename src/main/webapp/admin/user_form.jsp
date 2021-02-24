@@ -83,30 +83,31 @@
     <script src="../js/main.js"></script>
 </div>
 <jsp:include page="footer.jsp" />
-</body>
+
 <script type="text/javascript">
     $(document).ready(function(){
-       $("#user_form").validate({
-           rules: {
-               email: {
-                   required: true,
-                   email: true
-               },
-               fullname: "required",
-               password: "required"
-           },
-           messages: {
-               email: {
-                   required: "Please enter email",
-                   email: "Please enter a valid email address"
-               },
-               fullname: "Please enter full name",
-               password: "Please enter password"
-           }
-       });
-       $("#cancel").click(function() {
-           history.go(-1);
-       })
+        $("#user_form").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                fullname: "required",
+                password: "required"
+            },
+            messages: {
+                email: {
+                    required: "Please enter email",
+                    email: "Please enter a valid email address"
+                },
+                fullname: "Please enter full name",
+                password: "Please enter password"
+            }
+        });
+        $("#cancel").click(function() {
+            history.go(-1);
+        })
     })
 </script>
+</body>
 </html>
