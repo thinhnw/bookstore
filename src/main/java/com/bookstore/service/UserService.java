@@ -139,4 +139,20 @@ public class UserService {
             listUser(message);
         }
     }
+
+    public void login() throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        boolean loginResult = userDAO.checkLogin(email, password);
+        if (loginResult) {
+            request.getSession().setAttribute("userEmail", email);
+            RequestDispatcher rd = request.getRequestDispatcher("/admin/");
+            rd.forward(request, response);
+        } else {
+            String msg = "Login failed";
+            request.setAttribute("message", msg);
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
+        }
+    }
 }

@@ -15,7 +15,10 @@ public class AdminHomeServlet extends BaseServlet {
         String homepage = "/admin/index.jsp";
         RequestDispatcher rd = request.getRequestDispatcher(homepage);
         rd.forward(request, response);
-
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
 }
