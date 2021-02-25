@@ -14,8 +14,11 @@ public class UserDAO extends JpaDAO<UsersEntity> implements GenericDAO<UsersEnti
     }
 
     @Override
-    public UsersEntity create(UsersEntity e) {
-        return super.create(e);
+    public UsersEntity create(UsersEntity u) {
+
+        String encryptedPwd = HashGenerator.generateMD5(u.getPassword());
+        u.setPassword(encryptedPwd);
+        return super.create(u);
     }
 
     @Override
@@ -56,8 +59,9 @@ public class UserDAO extends JpaDAO<UsersEntity> implements GenericDAO<UsersEnti
     public boolean checkLogin(String email, String password) {
 
         Map<String, Object> params = new HashMap<>();
+        String encryptedPwd = HashGenerator.generateMD5(password);
         params.put("email", email);
-        params.put("password", password);
+        params.put("password", encryptedPwd);
         List<UsersEntity> users = super.findWithNamedQuery("UsersEntity.checkLogin", params);
 
         if (users.size() == 1) return true;
