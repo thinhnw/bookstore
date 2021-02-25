@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Admin Login</title>
@@ -10,6 +11,10 @@
     <div align="center">
         <h1>Bookstore Administration</h1>
         <h2>Admin Login</h2>
+
+        <c:if test="${message != null}">
+            <h4><em>${message}</em></h4>
+        </c:if>
 
         <form id="loginForm" action="login" method="post">
             <table>
