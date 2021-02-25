@@ -1,5 +1,6 @@
 package com.bookstore.service;
 
+import com.bookstore.dao.HashGenerator;
 import com.bookstore.dao.UserDAO;
 import com.bookstore.entity.BookEntity;
 import com.bookstore.entity.UsersEntity;
@@ -72,18 +73,19 @@ public class UserService {
 
         Integer userId = Integer.parseInt(request.getParameter("id"));
         UsersEntity user = userDAO.get(userId);
+        String destPage = "user_form.jsp";
+
         if (user != null) {
+            user.setPassword(null);
             request.setAttribute("user", user);
-            String editPage = "user_form.jsp";
-            RequestDispatcher rd = request.getRequestDispatcher(editPage);
-            rd.forward(request, response);
         } else {
             String message = "Could not find user with " + userId + ".";
             request.setAttribute("message", message);
-            RequestDispatcher rd = request.getRequestDispatcher("message.jsp");
-            rd.forward(request, response);
+            destPage = "message.jsp";
         }
 
+        RequestDispatcher rd = request.getRequestDispatcher(destPage);
+        rd.forward(request, response);
     }
 
     public void updateUser() throws ServletException, IOException {
@@ -104,8 +106,13 @@ public class UserService {
             RequestDispatcher rd = request.getRequestDispatcher("message.jsp");
             rd.forward(request, response);
         } else {
-            UsersEntity user = new UsersEntity(userId, email, fullName, password);
-            userDAO.update(user);
+            userById.setEmail(email);
+            userById.setFullName(fullName);
+            if (password != null & !password.isEmpty()) {
+                String encryptedPwd = HashGenerator.generateMD5(password);
+                userById.setPassword(encryptedPwd);
+            }
+            userDAO.update(userById);
 
             String message = "User has been updated successfully!";
             listUser(message);
